@@ -1,0 +1,229 @@
+/* Base Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #2B2B2B;
+  font-family: Arial, sans-serif;
+  color: #fff;
+}
+
+.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 15vh;
+  background-color: #1A2E4D; /* Darker, more saturated blue */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%; /* <-- This padding pushes content inward from left & right */
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+.header-content h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #EBC64C; /* Your specified yellow */
+}
+
+.header-content p {
+  margin: 5px 0 0 0;
+  font-size: 1rem;
+  color: #cccccc;
+}
+
+.gallery-button {
+  background-color: #FFD100;
+  color: #1A2E4D;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  margin-right: 150px; /* pull it away from the edge a bit */
+}
+
+
+
+
+.gallery-button:hover {
+  background-color: #FFD100;
+}
+
+.resume-container {
+  display: flex;
+  height: 100vh;
+  padding-top: 15vh;
+  box-sizing: border-box;
+  width: 100%; /* optional, explicit */
+}
+
+#center-column {
+  --bg-image: none;
+  --bg-opacity: 0.75;
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10%;
+  text-align: center;
+  overflow: hidden;
+
+  /* Fixed width for layout */
+  flex: 0 0 85%;  /* 85% width fixed */
+  box-sizing: border-box; /* ensure padding included in width */
+}
+
+#center-column::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--bg-image) no-repeat center center / cover;
+  opacity: var(--bg-opacity);
+  z-index: -1;
+}
+
+
+/* The main content box */
+.content {
+  max-width: 800px;
+    min-width: 650px;
+  padding: 20px;
+  background: #2B2B2B;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Content Text Styles */
+.year {
+  font-size: 2rem;
+  color: #EBC64C;
+  margin-bottom: 0rem;
+}
+
+.studio-name {
+  font-size: 3rem;
+  color: #ccc;
+  margin-bottom: 0.2rem;
+  font-style: italic;
+  
+}
+
+.job-title {
+  font-size: 2rem;
+  color: #EBC64C;
+  margin-bottom: 3rem;
+  font-weight: 600;
+}
+
+.skills-divider {
+  width: 400px;
+  height: 2px;
+  background: #1F8FDC;
+  margin: -2rem auto 3rem;
+}
+
+.skills-list {
+  list-style-type: none;
+  padding: 0;
+  margin: -1rem auto -3rem;
+  max-width: 500px;
+}
+
+.skills-list li {
+  color: white;
+  padding: 0.8rem 0;
+  line-height: 1;
+  font-size: 1.1rem;
+}
+
+.see-more-btn {
+  display: block;
+  width: 30%;
+  max-width: 300px;
+  margin: 4rem auto 0 auto;
+  text-align: center;
+  background-color: #FFD100;
+  color: #000000;
+  padding: 10px 10px;
+  border-radius: 2px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border: none;
+  font-size: 1rem;
+}
+
+.see-more-btn:hover {
+  background-color: #FFFFFF;
+  color: #000000;
+}
+
+/* Timeline Column - Circles */
+#timeline-column {
+  flex: 0 0 15%; /* Fixed to 15% */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 70%;
+  justify-content: space-between;
+}
+
+.timeline-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.timeline-circle.active {
+  background: #FFD100;
+  border-color: #000000;
+  transform: scale(1.3);
+}
+
+.timeline-circle.filled {
+  background: white;
+  border-color: white;
+}
+.arrow-up, .arrow-down {
+  width: 1; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: all 0.2s ease;
+    transform: scale(1.75);
+}
+
+.arrow-up {
+  border-bottom: 15px solid #1F8FDC;
+}
+
+.arrow-down {
+  border-top: 15px solid #1F8FDC;
+}
+
+.arrow-up:hover, .arrow-down:hover {
+  border-bottom-color: #FFFFFF;
+  border-top-color: #FFFFFF;
+  transform: scale(2.25);
+}

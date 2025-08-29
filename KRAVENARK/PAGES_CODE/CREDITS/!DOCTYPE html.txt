@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Credits</title>
+  <style>
+    /* Base Styles */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #2B2B2B;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Page Layout */
+    .page-wrapper {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 80px;
+      background-color: #1A1A1A;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 20px 0;
+      box-shadow: 0 0 10px rgba(255,255,255,0.3);
+      z-index: 1001;
+      transition: width 0.3s ease;
+      overflow: hidden;
+    }
+
+    #sidebar:hover {
+      width: 250px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      color: white;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .sidebar-item.active {
+      background-color: rgba(200, 200, 200, 0.2); /* Light yellow background */
+    }
+
+    .sidebar-item:hover {
+      background-color: #2B2B2B;
+    }
+
+    .sidebar-item.logo img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 50%;
+            filter: none;
+    }
+
+    .sidebar-item img {
+      width: 48px;
+      height: 48px;
+      filter: invert(1);
+      transition: all 0.3s;
+    }
+
+    .sidebar-item.active img {
+      filter: invert(77%) sepia(91%) saturate(348%) hue-rotate(358deg) brightness(101%) contrast(91%);
+    }
+
+    .sidebar-label {
+      margin-left: 15px;
+      font-size: 1.2rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      color: white;
+    }
+
+    .sidebar-item.active .sidebar-label {
+      color: #EBC64C; /* Yellow text for active item */
+    }
+
+    #sidebar:hover .sidebar-label {
+      opacity: 1;
+    }
+
+    .sidebarspace-item {
+      height: 30px;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 80px;
+      width: calc(100% - 80px);
+      transition: margin-left 0.3s;
+    }
+
+    #sidebar:hover ~ .main-content {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+    }
+
+    /* Header */
+    .page-header {
+      position: fixed;
+      top: 0;
+      left: 80px;
+      right: 0;
+      height: 15vh;
+      background-color: #1A2E4D;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10%;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      transition: left 0.3s;
+    }
+
+    #sidebar:hover ~ .main-content .page-header {
+      left: 250px;
+    }
+
+    .header-content h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #EBC64C;
+    }
+
+    .header-content p {
+      margin: 5px 0 0 0;
+      font-size: 1rem;
+      color: #cccccc;
+    }
+
+    .gallery-button {
+      background-color: #FFD100;
+      color: #1A2E4D;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      margin-right: 150px;
+    }
+
+    .gallery-button:hover {
+      background-color: #FFFFFF;
+    }
+
+    /* Content Sections */
+    .film-section-box, .game-section-box {
+      margin-top: 15vh;
+      padding: 40px 8%;
+      background-color: #1c1c1c;
+      box-sizing: border-box;
+    }
+
+    .game-section-box {
+      margin-top: 20px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+      color: #EBC64C;
+      font-size: 32px;
+      margin: 0 20px 0 0;
+      white-space: nowrap;
+    }
+
+    .title-line {
+      flex-grow: 1;
+      height: 2px;
+      background-color: white;
+      opacity: 0.6;
+    }
+
+    /* Film/Game Cards */
+    .film-gallery {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 24px;
+      padding: 10px 0;
+    }
+
+    .film-card {
+      flex: 0 0 auto;
+      width: 300px;
+      height: 450px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .film-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .film-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 12px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .film-overlay h3 {
+      color: #FFD100;
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .film-overlay p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: white;
+    }
+
+    .film-card:hover {
+      border: 2px solid white;
+      box-shadow: 0 0 10px white;
+    }
+
+    .film-card:hover .film-overlay {
+      opacity: 1;
+    }
+
+    /* Scrollbar */
+    .film-gallery::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .film-gallery::-webkit-scrollbar-thumb {
+      background-color: #444;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar">
+<div class="sidebar-item logo">
+  <img src="https://kravenark.com/wp-content/uploads/2022/11/KravenArk_Stamp_2-300x300.png" alt="Logo" class="inverted-logo">
+  <span class="sidebar-label"></span>
+</div>
+
+      <!-- Spacer -->
+      <div class="sidebarspace-item"></div>
+
+      <!-- Navigation Items -->
+      <div class="sidebar-item">
+        <img src="https://kravenark.com/wp-content/uploads/2025/06/Website_Icons_StartMenu_011.svg" alt="Landing Icon">
+        <span class="sidebar-label">Landing</span>
+      </div>
+
+      <div class="sidebar-item">
+        <img src="https://kravenark.com/wp-content/uploads/2025/06/Website_Icon_Gallery_021.svg" alt="Portfolio Icon">
+        <span class="sidebar-label">Portfolio</span>
+      </div>
+
+      <div class="sidebar-item">
+        <img src="https://kravenark.com/wp-content/uploads/2025/06/Website_Icons_Experience_011.svg" alt="Resume Icon">
+        <span class="sidebar-label">Resume</span>
+      </div>
+      
+      <div class="sidebar-item active">
+        <img src="https://kravenark.com/wp-content/uploads/2025/06/Website_Icons_Credits_011.svg" alt="Credits Icon">
+        <span class="sidebar-label">Credits</span>
+      </div>
+      
+      <!-- Spacer -->
+      <div class="sidebarspace-item"></div>
+      
+      <!-- Social Links -->
+      <div class="sidebar-item">
+        <img src="https://www.svgrepo.com/show/506668/instagram.svg" alt="Instagram Icon">
+        <span class="sidebar-label">Instagram</span>
+      </div>
+      
+      <div class="sidebar-item">
+        <img src="https://www.iconpacks.net/icons/1/free-linkedin-icon-112-thumb.png" alt="LinkedIn Icon">
+        <span class="sidebar-label">LinkedIN</span>
+      </div>
+      
+      <div class="sidebar-item">
+        <img src="https://www.svgrepo.com/show/383303/email-address-sign-at-inbox.svg" alt="Email Icon">
+        <span class="sidebar-label">Email</span>
+      </div>
+      
+      <div class="sidebar-item">
+        <img src="https://www.svgrepo.com/show/13641/phone-call.svg" alt="Phone Icon">
+        <span class="sidebar-label">Phone</span>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <header class="page-header">
+        <div class="header-content">
+          <h1>Credits</h1>
+          <p>Some cool titles I've worked on</p>
+        </div>
+        <div class="header-button">
+          <a href="https://pro.imdb.com/title/tt10304142/companycredits?rf=cons_tt_cocred_tt&ref_=cons_tt_cocred_tt" target="_blank" class="gallery-button">IMDb</a>
+        </div>
+      </header>
+      
+      <!-- Film Section -->
+      <div class="film-section-box">
+        <section class="film-row">
+          <div class="section-title">
+            <h2>Film/TV</h2>
+            <div class="title-line"></div>
+          </div>
+
+          <div class="film-gallery">
+            <a href="https://www.youtube.com/watch?v=JrmC2uJXsMM" class="film-card" target="_blank">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuEo449bMkIsJve_C3I0_wfSYijiEdSlNWVw&s" alt="Sausage Party">
+              <div class="film-overlay">
+                <h3>Sausage Party</h3>
+                <p>2024</p>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=6nhwT1vQS68" class="film-card" target="_blank">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ8lI1W6mpvfvOtN410j-0tExswdRCZME9AA&s" alt="Witcher: Blood Origin">
+              <div class="film-overlay">
+                <h3>Witcher: Blood Origin</h3>
+                <p>2023</p>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=OjIz3knndzo" class="film-card" target="_blank">
+              <img src="https://static1.srcdn.com/wordpress/wp-content/uploads/2022/07/Owen-Wilson-as-a-superhero-in-Secret-Headquarters.jpg" alt="Secret Headquarters">
+              <div class="film-overlay">
+                <h3>Secret Headquarters</h3>
+                <p>2023</p>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=NBdXAnyz9vE" class="film-card" target="_blank">
+              <img src="https://i.ebayimg.com/images/g/Z~EAAOSwbI1jRwuI/s-l1200.jpg" alt="Amsterdam">
+              <div class="film-overlay">
+                <h3>Amsterdam</h3>
+                <p>2023</p>
+              </div>
+            </a>
+
+            <a href="https://www.youtube.com/watch?v=6Avo0HmeyQI" class="film-card" target="_blank">
+              <img src="https://img-s-msn-com.akamaized.net/tenant/amp/entityid/BB1lQ5JT.img?w=768&h=1156&m=6" alt="Batgirl">
+              <div class="film-overlay">
+                <h3>Batgirl</h3>
+                <p>2023</p>
+              </div>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- Game Section -->
+      <div class="game-section-box">
+        <section class="film-row">
+          <div class="section-title">
+            <h2>Games</h2>
+            <div class="title-line"></div>
+          </div>
+
+          <div class="film-gallery">
+            <a href="https://www.falloutcascadia.com/" class="film-card" target="_blank">
+              <img src="https://pbs.twimg.com/profile_images/1775178140681166848/uJEWbYG5_200x200.jpg" alt="Fallout: Cascadia">
+              <div class="film-overlay">
+                <h3>Fallout: Cascadia</h3>
+                <p>2024</p>
+              </div>
+            </a>
+
+            <a href="https://store.steampowered.com/app/1103960/The_Missing_Few/" class="film-card" target="_blank">
+              <img src="https://img.itch.zone/aW1nLzQ1NTkxNjYucG5n/original/lc81R5.png" alt="The Missing Few">
+              <div class="film-overlay">
+                <h3>The Missing Few</h3>
+                <p>2022</p>
+              </div>
+            </a>
+
+            <a href="https://roh-online.com/" class="film-card" target="_blank">
+              <img src="https://media.alienwarearena.com/media/668e6235621d6fefc6f7bf8bffc30c59.png?fit=crop&width=630&height=315&quality=75" alt="Ray of Hope">
+              <div class="film-overlay">
+                <h3>Ray of Hope</h3>
+                <p>2018</p>
+              </div>
+            </a>
+
+            <a href="https://en.wikipedia.org/wiki/Penumbra:_Necrologue" class="film-card" target="_blank">
+              <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/co85ji.webp" alt="Penumbra: Necrologue">
+              <div class="film-overlay">
+                <h3>Penumbra: Necrologue</h3>
+                <p>2017</p>
+              </div>
+            </a>
+
+            <a href="#" class="film-card" target="_blank">
+              <img src="https://i.imgur.com/tLUlJda.jpeg" alt="Aruna">
+              <div class="film-overlay">
+                <h3>Aruna</h3>
+                <p>2022</p>
+              </div>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

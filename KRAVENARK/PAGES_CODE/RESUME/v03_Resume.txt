@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Artist Resume</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; overflow-x: hidden; }
+
+  header.page-header {
+    height : 15vh;
+    width: 100%;
+    padding: 60px 5%; /* was 40px 5% */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2B2B2B;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+      background-color: #1A2E4D; /* dark saturated blue */
+
+  border-bottom: 2px solid #FFFFFF; /* white border at bottom */
+  }
+  .header-content {
+    padding-left: 40px;  /* space from sidebar */
+    padding-top: 20px;   /* space from top of header */
+}
+
+
+  header h1 { font-size: 28px; color: #FFD100; }
+  header p { font-size: 14px; color: #fff; margin-top: 4px; }
+  .header-button a {
+    padding: 15px 14px;
+    background: #FFD100;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 3px;
+  }
+
+  .resume-container {
+    display: flex;
+    width: 100%;
+    padding-top: 100px; /* header height */
+  }
+
+  /* Center column */
+  #center-column {
+    flex: 1;
+    width: 100%;
+  }
+
+.page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: start;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+#page1 { background-image: url("https://pbs.twimg.com/media/EtVymCwXAAI6K21.jpg"); }
+#page2 { background-image: url("https://media.mpcvfx.com/app/uploads/2022/05/Amsterdam_dtlr2_4k_txtls_r709_still.088762-H-2022.webp"); }
+#page3 { background-image: url("https://i.imgur.com/tLUlJda.jpeg"); }
+#page4 { background-image: url("https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1103960/capsule_616x353.jpg"); }
+#page5 { background-image: url("https://media.alienwarearena.com/media/668e6235621d6fefc6f7bf8bffc30c59.png"); }
+#page6 { background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF2XngPtlqsKa-EawN8QQYeEa9_RptrQHQ0I76jL0JgYAQh085e1MPSjQ9dD5-s1GJGnk&usqp=CAU"); }
+
+
+#edu1 { 
+  background-image: url("https://media-www.sheridancollege.ca/-/media/project/sheridan/shared/images/campuses/trafalgar/trafalgar-road-campus-sheridan-college_2.jpg"); 
+}
+
+#edu2 { 
+  background-image: url("https://a.storyblok.com/f/122726/1200x630/932cd97ea1/default-og-image.jpg"); 
+}
+
+#edu3 { 
+  background-image: url("https://static.sites.cgmasteracademy.com/imgproxy/Z3t2Uazwt9tydnuGtsEfJW24yKrsX0VH7qgxwnTWROo/resize:fit:0:640/gravity:sm/quality:85/aHR0cHM6Ly9zdGF0aWMuc2l0ZXMuY2dtYXN0ZXJhY2FkZW15LmNvbS9zaXRlcy82Mzc0Zjg2NTllNDNhNjA1MzI4N2VlYjAvY29udGVudF9lbnRyeTYzN2RjNjE3YjFjMTM1MDAwMWNkNTNkNy82MzdkZTI5NjU2ZjQyZTAwMDEzYzFmOTMvZmlsZXMvQ29uY2VwdF9hcnRfc2Nob29sLnBuZw.png"); 
+}
+
+
+/* Overlay to keep text readable */
+.page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5); /* semi-transparent black overlay */
+  z-index: 0;
+}
+
+
+
+  .content-card {
+      z-index: 1;
+    width: 60vw;   /* bigger width */
+    height: calc(40vw); /* width:height = 1.5:1 */
+    max-width: 1200px;
+    max-height: 800px;
+    background: #3a3a3a;
+    border-radius: 12px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    text-align: center;
+  }
+
+  .year { font-size: 20px; color: #FFFFFF; margin-bottom: 10px; }
+  .company-name { font-size: 60px; color: #FFD100; font-weight: bold; margin-bottom: 8px; }
+  .job-title { font-size: 30px; color: #FFFFFF; font-style: italic; margin-bottom: 16px; }
+.bullets { 
+  list-style: disc; 
+  list-style-position: inside; 
+  padding-left: 0; 
+  text-align: center; 
+  color: #fff; 
+  font-size: 16px; 
+  margin-bottom: 20px; 
+}
+
+  .bullets li { margin-bottom: 8px; }
+  .btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #FFD100;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+
+  /* Timeline column */
+  #timeline-column {
+      z-index: 1;
+    width: 60px;
+    position: fixed;
+    right: 0;
+    top: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+/* add this */
+#timeline-column::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3); /* 30% black */
+  z-index: -1;
+  border-radius: 8px; /* optional */
+}
+
+.timeline-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #6B6B6B; /* future pages = grey */
+  margin: 20px 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.timeline-circle.completed { background: #FFFFFF; } /* previous pages = white */
+.timeline-circle.active { background: #FFD100; }    /* current page = yellow */
+
+
+.main-content {
+  margin-left: 80px; /* or 0 if no sidebar */
+  width: calc(100% - 80px);
+  transition: margin-left 0.3s;
+}
+
+#hamburger-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1200;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0;
+}
+
+#hamburger-btn span {
+  display: block;
+  width: 50px;
+  height: 5px;
+  background: white;
+  border-radius: 2px;
+}
+
+#sidebar {
+  width: 80px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #1A1A1A;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+#sidebar:hover {
+  width: 250px;
+  align-items: flex-start;
+  padding-left: 20px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar-item:hover {
+  background-color: #2B2B2B;
+}
+
+.sidebar-item img {
+  width: 48px;
+  height: 48px;
+  filter: invert(1);
+  transition: filter 0.3s;
+}
+
+.sidebar-label {
+  margin-left: 15px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+  color: white;
+}
+
+#sidebar:hover .sidebar-label {
+  opacity: 1;
+}
+
+#sidebar.open {
+  transform: translateX(0);
+}
+.sidebar-item.active {
+    background-color: rgba(200, 200, 200, 0.2); /* optional highlight */
+}
+
+.sidebar-item.active img {
+    filter: invert(83%) sepia(98%) saturate(1000%) hue-rotate(360deg) brightness(105%) contrast(101%);
+}
+
+.sidebar-item.active .sidebar-label {
+    color: #EBC64C; /* yellow */
+}
+
+
+
+@media (max-width: 768px) {
+  #sidebar {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    z-index: 1500;
+    padding: 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #1A1A1A;
+    transition: transform 0.3s ease;
+  }
+
+  #sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  #hamburger-btn { display: flex; }
+}
+
+
+
+
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-content">
+    <h1>Resume</h1>
+    <p>Opportunities I've had throughout my career</p>
+  </div>
+<div class="header-button">
+  <a href="https://drive.google.com/file/d/1pw8gBQm8I4ptxd4vw4hphVtLJoiKF3eE/view?usp=sharing" target="_blank" rel="noopener noreferrer">PDF VERSION</a>
+</div>
+
+</header>
+
+<div class="resume-container">
+
+<button id="hamburger-btn" type="button" aria-label="Toggle sidebar" aria-expanded="false" aria-controls="sidebar">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<nav id="sidebar" aria-label="Primary Sidebar">
+  <div class="sidebar-item logo">
+    <img src="https://kravenark.com/wp-content/uploads/2022/11/KravenArk_Stamp_2-300x300.png" alt="Logo" style="filter: invert(1) brightness(5);" />
+  </div>
+
+
+  <div class="sidebarspace-item">&nbsp;</div>
+
+  <a class="sidebar-item" href="https://kravenark.com/landing/">
+    <img src="https://kravenark.com/wp-content/uploads/2025/06/Website_Icons_StartMenu_011.svg" alt="Landing Icon" />
+    <span class="sidebar-label">Landing</span>
+  </a>
+
+  <a class="sidebar-item" href="https://kravenark.com/gallery-page-v03/">
+    <img src="https://kravenark.com/wp-content/uploads/2025/06/Website_Icon_Gallery_021.svg" alt="Portfolio Icon" />
+    <span class="sidebar-label">Portfolio</span>
+  </a>
+
+  <a class="sidebar-item active" href="https://kravenark.com/experience-page-v02/">
+    <img src="https://kravenark.com/wp-content/uploads/2025/06/Website_Icons_Experience_011.svg" alt="Resume Icon" />
+    <span class="sidebar-label">Resume</span>
+  </a>
+
+  <a class="sidebar-item" href="https://kravenark.com/credits-page-v02/">
+    <img src="https://kravenark.com/wp-content/uploads/2025/06/Website_Icons_Credits_011.svg" alt="Credits Icon" />
+    <span class="sidebar-label">Credits</span>
+  </a>
+</nav>
+
+
+
+  <main class="main-content">
+    <div class="column" id="center-column">
+
+      <!-- Stellar Creative Lab -->
+      <div class="page" id="page1">
+        <div class="content-card">
+          <div class="year">2022</div>
+          <div class="company-name">Stellar Creative Lab</div>
+          <div class="job-title">CG Generalist</div>
+          <ul class="bullets">
+            <li>Built custom tools in Python, JS, and MEL to optimize asset validation</li>
+            <li>Ensured QA and performance standards while maintaining top-tier quality</li>
+            <li>Mentored outsourced artists internationally, documenting custom pipelines</li>
+          </ul>
+          <a href="#" class="btn-link">Visit Company</a>
+        </div>
+      </div>
+
+      <!-- MPC / Mr.X -->
+      <div class="page" id="page2">
+        <div class="content-card">
+          <div class="year">2021</div>
+          <div class="company-name">MPC / Mr.X</div>
+          <div class="job-title">Asset Artist</div>
+          <ul class="bullets">
+            <li>Engineered automated UV mapping scripts in MEL and customized shading in Houdini</li>
+            <li>Produced high-quality assets while maintaining technical standards</li>
+            <li>Delivered client presentations integrating feedback and quality control</li>
+          </ul>
+          <a href="https://www.mpc.com/" class="btn-link">Visit Company</a>
+        </div>
+      </div>
+
+      <!-- Art For Story -->
+      <div class="page" id="page3">
+        <div class="content-card">
+          <div class="year">2020</div>
+          <div class="company-name">Art For Story</div>
+          <div class="job-title">Environment Artist</div>
+          <ul class="bullets">
+            <li>Co-developed core gameplay systems in Unity for an AR game</li>
+            <li>Managed full 3D asset pipeline, turning props, vehicles, and armour from concept to implementation</li>
+            <li>Helped build AI-driven animation tools and documentation for workflow optimization</li>
+          </ul>
+          <a href="#" class="btn-link">Visit Company</a>
+        </div>
+      </div>
+
+
+    <!-- The Missing Few -->
+    <div class="page" id="page4">
+      <div class="content-card">
+        <div class="year">2020</div>
+        <div class="company-name">The Missing Few</div>
+        <div class="job-title">Environment Artist</div>
+        <ul class="bullets">
+          <li>Modeled and textured buildings and city streets for semi-open world exploration</li>
+          <li>Integrated puzzles and interactive elements to enhance narrative immersion</li>
+          <li>Collaborated closely with design and narrative teams for story-driven environments</li>
+        </ul>
+        <a href="#" class="btn-link">Visit Game</a>
+      </div>
+    </div>
+
+    <!-- Ray of Hope -->
+    <div class="page" id="page5">
+      <div class="content-card">
+        <div class="year">2020</div>
+        <div class="company-name">Ray of Hope</div>
+        <div class="job-title">3D Artist</div>
+        <ul class="bullets">
+          <li>Created character armour, environment props, and UI assets for a standalone game mod</li>
+          <li>Ensured visual consistency and technical optimization for in-engine assets</li>
+          <li>Collaborated with designers and programmers for efficient asset integration</li>
+        </ul>
+        <a href="#" class="btn-link">Visit Project</a>
+      </div>
+    </div>
+
+<!-- CounterCurrent Games -->
+<div class="page" id="page6">
+  <div class="content-card">
+    <div class="year">2016</div>
+    <div class="company-name">CounterCurrent Games</div>
+    <div class="job-title">Prop Artist</div>
+    <ul class="bullets">
+      <li>Crafted highly detailed interior props to enrich in-game environments</li>
+      <li>Collaborated closely with the Art Director to align assets with the game’s visual style</li>
+      <li>Translated concept art into cohesive, optimized 3D assets ready for implementation</li>
+    </ul>
+    <a href="#" class="btn-link">Visit Company</a>
+  </div>
+</div>
+
+      <!-- The rest of your pages follow the same structure -->
+      <!-- ... -->
+<!-- Education 1 -->
+<div class="page" id="edu1">
+  <div class="content-card">
+    <div class="year">2020</div>
+    <div class="company-name">Sheridan College</div>
+    <div class="job-title">Game / Software Design</div>
+    <ul class="bullets">
+      <li>Comprehensive game development curriculum</li>
+      <li>Team-based project development experience</li>
+      <li>Portfolio development for industry readiness</li>
+    </ul>
+    <a href="#" class="btn-link">See More</a>
+  </div>
+</div>
+
+<!-- Education 2 -->
+<div class="page" id="edu2">
+  <div class="content-card">
+    <div class="year">2019</div>
+    <div class="company-name">Gnomon Online</div>
+    <div class="job-title">Hard Surface Modelling</div>
+    <ul class="bullets">
+      <li>Advanced techniques for mechanical and architectural models</li>
+      <li>Precision modeling for film and game pipelines</li>
+      <li>Industry‑standard workflows for complex surfaces</li>
+    </ul>
+    <a href="#" class="btn-link">See More</a>
+  </div>
+</div>
+
+<!-- Education 3 -->
+<div class="page" id="edu3">
+  <div class="content-card">
+    <div class="year">2019</div>
+    <div class="company-name">CGMA Online</div>
+    <div class="job-title">Weapons and Props for Games</div>
+    <ul class="bullets">
+      <li>Mastered hard‑surface modeling techniques for game assets</li>
+      <li>Developed professional workflow for game‑ready assets</li>
+      <li>Created portfolio pieces demonstrating weapon and prop design</li>
+    </ul>
+    <a href="#" class="btn-link">See More</a>
+  </div>
+</div>
+
+
+    </div> <!-- end center-column -->
+  </main> <!-- end main-content -->
+
+    <!-- Timeline -->
+  <div class="column" id="timeline-column">
+    <div class="timeline-circle active" data-target="page1"></div>
+    <div class="timeline-circle" data-target="page2"></div>
+    <div class="timeline-circle" data-target="page3"></div>
+    <div class="timeline-circle" data-target="page4"></div>
+    <div class="timeline-circle" data-target="page5"></div>
+    <div class="timeline-circle" data-target="page6"></div>
+
+<div style="height: 40px;"></div> <!-- gap -->
+<div class="timeline-circle" data-target="edu1"></div>
+<div class="timeline-circle" data-target="edu2"></div>
+<div class="timeline-circle" data-target="edu3"></div>
+
+</div>
+</div>
+
+
+<script>
+  const circles = document.querySelectorAll('.timeline-circle');
+  const pages = document.querySelectorAll('.page');
+
+  // Highlight timeline based on scroll
+  window.addEventListener('scroll', () => {
+    pages.forEach((page, i) => {
+      const rect = page.getBoundingClientRect();
+      if(rect.top <= window.innerHeight/2 && rect.bottom >= window.innerHeight/2) {
+        circles.forEach(c => c.classList.remove('active'));
+        circles[i].classList.add('active');
+      }
+    });
+  });
+
+window.addEventListener('scroll', () => {
+  pages.forEach((page, i) => {
+    const rect = page.getBoundingClientRect();
+    if (rect.top <= window.innerHeight/2 && rect.bottom >= window.innerHeight/2) {
+      circles.forEach((c, idx) => {
+        c.classList.remove('active', 'completed');
+        if (idx < i) c.classList.add('completed'); // previous pages
+      });
+      circles[i].classList.add('active'); // current page
+    }
+  });
+});
+
+
+  // Scroll to page when timeline circle clicked
+  circles.forEach((circle, i) => {
+    circle.addEventListener('click', () => {
+      pages[i].scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const sidebar = document.getElementById('sidebar');
+
+hamburgerBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+});
+
+document.addEventListener('click', (event) => {
+  if (!sidebar.contains(event.target) && !hamburgerBtn.contains(event.target) && sidebar.classList.contains('open')) {
+    sidebar.classList.remove('open');
+  }
+});
+
+
+</script>
+
+</body>
+</html>
